@@ -1,0 +1,25 @@
+service: go-uniswap-etherscan-aws-serverless
+
+provider:
+  name: aws
+  profile: ${file(env.json):AWS_PROFILE}
+  runtime: go1.x
+  environment:
+    ETHERSCAN_API_KEY: ${file(env.json):ETHERSCAN_API_KEY}
+    USER_WALLET_ADDRESS: ${file(env.json):USER_WALLET_ADDRESS}
+    LIQUIDITY_PROVIDER_POOL_POSITIONS: ${file(env.json):LIQUIDITY_PROVIDER_POOL_POSITIONS}
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  main:
+    handler: bin/main
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
