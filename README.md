@@ -20,12 +20,13 @@
 ### LIQUIDITY_PROVIDER_POOL_POSITIONS
 * This environment variable is a string tha represents:
     * Multiple positions separated by the pipe `|` character
-        * 5 values for each position separated by comma `,`
+        * 6 values for each position separated by comma `,`
             * Value 1: The token that represents the liquidity pool of choice. Should be DAI_WETH_LP or DAI_USDC_LP.
             * Value 2: The first token of the liquidity pool. Should be DAI, WETH or USDC.
             * Value 3: The initial quantity of your position of the first token.
             * Value 4: The second token of the liquidity pool. Should be DAI, WETH or USDC.
             * Value 5: The initial quantity of your position of the second token.
+            * Value 6: The initial date of your position in RFC3339 format (e.g. 2021-01-31T12:00:00Z if you started your pool position at that time)
     * If you want to use tokens not provided by default (only DAI_WETH and DAI_USDC pools are provided):
         * Create custom `unisummary.Token`, one for each token that you wish (base tokens and pool tokens)
         * Customize `parse_config.go` to allow your custom types 

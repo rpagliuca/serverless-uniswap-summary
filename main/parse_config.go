@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
 	us "github.com/rpagliuca/go-uniswap-summary/pkg/unisummary"
 )
@@ -16,26 +17,26 @@ var allTokens = []us.Token{
 	us.TOKEN_USDC,
 }
 
-func parseConfig(c string) []us.LiquidityProviderToken {
+func parseConfig(c string) []us.LiquidityProviderPosition {
 	items := strings.Split(c, "|")
-	tokens := []us.LiquidityProviderToken{}
+	tokens := []us.LiquidityProviderPosition{}
 	for _, item := range items {
 		tokens = append(tokens, parseItem(item))
 	}
 	return tokens
 }
 
-func parseItem(item string) us.LiquidityProviderToken {
+func parseItem(item string) us.LiquidityProviderPosition {
 	values := strings.Split(item, ",")
-	if len(values) != 5 {
-		panic("Invalid configuration. Each LP item should contain 5 values.")
+	if len(values) != 6 {
+		panic("Invalid configuration. Each LP item should contain 6 values.")
 	}
-	stringStruct := StringStruct{values[0], values[1], values[2], values[3], values[4]}
+	stringStruct := StringStruct{values[0], values[1], values[2], values[3], values[4], values[5]}
 	typedStruct := convertToTyped(stringStruct)
 	return typedStruct
 }
 
-func convertToTyped(s StringStruct) us.LiquidityProviderToken {
+func convertToTyped(s StringStruct) us.LiquidityProviderPosition {
 	lpToken, err := findToken(s.LpTokenId)
 	handleError(err)
 	token1, err := findToken(s.Token1Id)
@@ -46,13 +47,23 @@ func convertToTyped(s StringStruct) us.LiquidityProviderToken {
 	handleError(err)
 	token2Quantity, err := strconv.ParseFloat(s.Token2InitialQuantity, 64)
 	handleError(err)
-	return us.LiquidityProviderToken{
+	initialDate := strToDate(s.InitialDate)
+	return us.LiquidityProviderPosition{
 		*lpToken,
 		*token1,
 		token1Quantity,
 		*token2,
 		token2Quantity,
+		initialDate,
 	}
+}
+
+func strToDate(date string) time.Time {
+	d, err := time.Parse(time.RFC3339, date)
+	if err != nil {
+		panic(err)
+	}
+	return d
 }
 
 func findToken(tokenId string) (*us.Token, error) {
@@ -70,6 +81,7 @@ type StringStruct struct {
 	Token1InitialQuantity string
 	Token2Id              string
 	Token2InitialQuantity string
+	InitialDate           string
 }
 
 func handleError(err error) {
