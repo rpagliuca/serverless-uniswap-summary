@@ -4,6 +4,8 @@ provider:
   name: aws
   profile: ${file(env.json):AWS_PROFILE}
   runtime: go1.x
+  memorySize: 128
+  timeout: 15
   environment:
     ETHERSCAN_API_KEY: ${file(env.json):ETHERSCAN_API_KEY}
 
