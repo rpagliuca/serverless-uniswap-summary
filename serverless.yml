@@ -6,8 +6,6 @@ provider:
   runtime: go1.x
   environment:
     ETHERSCAN_API_KEY: ${file(env.json):ETHERSCAN_API_KEY}
-    USER_WALLET_ADDRESS: ${file(env.json):USER_WALLET_ADDRESS}
-    LIQUIDITY_PROVIDER_POOL_POSITIONS: ${file(env.json):LIQUIDITY_PROVIDER_POOL_POSITIONS}
 
 package:
   exclude:
@@ -20,6 +18,10 @@ functions:
     handler: bin/main
     events:
       - http:
-          path: /
+          path: /{walletAddress}
           method: get
           cors: true
+          request:
+            parameters:
+              paths:
+                walletAddress: true

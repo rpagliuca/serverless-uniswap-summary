@@ -12,26 +12,9 @@
 * Copy the file `env.json.dist` to `env.json` and enter your custom configuration
 * Run the command `make deploy` (or perhaps `make build` + `serverless deploy`)
 * The last command will show you the deployed lambda function `endpoint`
-* Visit the `endpoint` on your browser
-* It is a good idea to keep the `endpoint` secret, because it contains all your Uniswap LP positions openly
+* Visit the `endpoint` on your browser. Remember to replace the end of the URL with your own Ethereum wallet address.
+    * The endpoint should look something like: [https://random\_identifier.execute-api.us-east-1.amazonaws.com/dev/{walletAddress}](#)
 
 ## About the environment variables
-
-### LIQUIDITY_PROVIDER_POOL_POSITIONS
-* This environment variable is a string tha represents:
-    * Multiple positions separated by the pipe `|` character
-        * 6 values for each position separated by comma `,`
-            * Value 1: The token that represents the liquidity pool of choice. Should be DAI_WETH_LP or DAI_USDC_LP.
-            * Value 2: The first token of the liquidity pool. Should be DAI, WETH or USDC.
-            * Value 3: The initial quantity of your position of the first token.
-            * Value 4: The second token of the liquidity pool. Should be DAI, WETH or USDC.
-            * Value 5: The initial quantity of your position of the second token.
-            * Value 6: The initial date of your position in RFC3339 format (e.g. 2021-01-31T12:00:00Z if you started your pool position at that time)
-    * If you want to use tokens not provided by default (only DAI_WETH and DAI_USDC pools are provided):
-        * Create custom `unisummary.Token`, one for each token that you wish (base tokens and pool tokens)
-        * Customize `parse_config.go` to allow your custom types 
-
-### Other variables
-* The other environment variables are:
-    * Your Etherscan API key (even the free account works)
-    * Your Ethereum wallet address (which should contain some of the liquidity provider pool tokens used in the configuration). 
+* AWS\_PROFILE: used by `serverless` CLI locally to authenticate with `aws-cli`.
+* ETHERSCAN\_API\_KEY: secret published to the AWS Lambda as env var. Register for a free api key at www.etherscan.io.

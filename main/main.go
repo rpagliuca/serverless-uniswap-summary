@@ -12,12 +12,12 @@ type Response events.APIGatewayProxyResponse
 type Request events.APIGatewayProxyRequest
 
 var etherscanApiKey = os.Getenv("ETHERSCAN_API_KEY")
-var userWalletAddress = os.Getenv("USER_WALLET_ADDRESS")
-var liquidityProviderPoolPositions = os.Getenv("LIQUIDITY_PROVIDER_POOL_POSITIONS")
 
 func Handler(ctx context.Context, request Request) (Response, error) {
 
-	data := run(etherscanApiKey, userWalletAddress, liquidityProviderPoolPositions)
+	userWalletAddress := request.PathParameters["walletAddress"]
+
+	data := run(etherscanApiKey, userWalletAddress)
 
 	// Return JSON response
 	return createSuccessResponse(data)

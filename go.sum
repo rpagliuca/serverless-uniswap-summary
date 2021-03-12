@@ -10,6 +10,8 @@ github.com/rpagliuca/go-uniswap-summary v0.1.0 h1:OHp8bE/wse4bgdmA+heZ2K2d13Ci84
 github.com/rpagliuca/go-uniswap-summary v0.1.0/go.mod h1:c8ogGbBq5Hs1FJlKhJGEAs0ZChC/Be4XyHoBSKPcTfg=
 github.com/rpagliuca/go-uniswap-summary v0.2.0 h1:6nUmivntdsVYaGaiJpjvsSkkJ0WOvFarnYbsNqKx84A=
 github.com/rpagliuca/go-uniswap-summary v0.2.0/go.mod h1:c8ogGbBq5Hs1FJlKhJGEAs0ZChC/Be4XyHoBSKPcTfg=
+github.com/rpagliuca/go-uniswap-summary v0.3.0 h1:MGW/M89rsdA5YoonXvgWQiZA8Q/xi2OhSMsMYf7l80A=
+github.com/rpagliuca/go-uniswap-summary v0.3.0/go.mod h1:c8ogGbBq5Hs1FJlKhJGEAs0ZChC/Be4XyHoBSKPcTfg=
 github.com/russross/blackfriday/v2 v2.0.1/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
