@@ -8,6 +8,11 @@ provider:
   timeout: 15
   environment:
     ETHERSCAN_API_KEY: ${file(env.json):ETHERSCAN_API_KEY}
+  apiGateway:
+    usagePlan:
+      quota:
+        limit: 10000
+        period: DAY
 
 package:
   exclude:
